@@ -1,0 +1,1 @@
+export { default as BottomTabNav } from './BottomTabNav'
