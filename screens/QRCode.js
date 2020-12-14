@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
 import { Text, View, StyleSheet, Image } from 'react-native'
+import QRCode from 'react-native-qrcode-svg'
 
-export default function QRCode({ navigation }) {
+export default function QRCodePage({ navigation }) {
 
   return (
     <View style={styles.container}>
       <Text>QRCode page</Text>
-      <Image
-        style={{ width: 300, height: 300 }}
-        source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/220px-QR_code_for_mobile_English_Wikipedia.svg.png" }} />
+      <QRCode 
+        value="ini ngetes"
+        size={250}
+        color="black"
+        backgroundColor="white"/>
     </View>
   )
 }

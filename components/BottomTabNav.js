@@ -1,7 +1,7 @@
 import React from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { MaterialCommunityIcons, Octicons, MaterialIcons, FontAwesome } from '@expo/vector-icons';
-import { Home, Package, History, QRCode, Profile } from '../screens/'
+import { Home, Package, History, QRCodePage, Profile } from '../screens/'
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -36,7 +36,7 @@ export default function BottomTabNav() {
       />
       <Tab.Screen
         name="QRCode"
-        component={QRCode}
+        component={QRCodePage}
         options={{
           tabBarLabel: 'QR Code',
           tabBarIcon: ({ color }) => (
