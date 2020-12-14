@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Text, View, StyleSheet, Button, TextInput } from "react-native"
+import { Text, View, StyleSheet, Button, TextInput, Image } from "react-native"
 import {MenuButton} from '../components/Buttons'
 
 export default function Landing({ navigation }) {
@@ -14,21 +14,21 @@ export default function Landing({ navigation }) {
     <View style={styles.container}>
       
       <View style={styles.header}>
-        <Text style={styles.headerText}>Better Letter</Text>
+        <Image style={styles.logo} source={require('../assets/BetterLetterLogo_color.png')}/>
       </View>
 
       <View style={styles.buttonGroup}>
         <View style={styles.buttonContainer}>
+          <MenuButton
+            text="Login"
+              onPress={goToLoginPage}
+            />
           <MenuButton
           text="Register"
             onPress={gotToRegisterPage}
           />
         </View>
         <View style={styles.buttonContainer}>
-        <MenuButton
-          text="Login"
-            onPress={goToLoginPage}
-          />
         </View>
       </View>
 
@@ -44,6 +44,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#2623bf",
     alignItems: "center",
     justifyContent: "center",
+  },
+  logo: {
+    width: 180,
+    resizeMode: 'contain',
   },
   header: {
     flex: 2,

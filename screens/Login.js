@@ -24,7 +24,7 @@ export default function Login({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>USER LOGIN</Text>
+        <Text style={styles.headerText}>LOGIN</Text>
       </View>
       <View style={styles.groupContainer}>
         <TextInput
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   header: {
   },
   headerText: {
-    fontSize: 20,
+    fontSize: 25,
     alignSelf: 'center',
     letterSpacing: 3,
     color: '#2623bf',
