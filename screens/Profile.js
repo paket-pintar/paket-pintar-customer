@@ -1,7 +1,18 @@
 import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { Text, View, StyleSheet, Button, TextInput } from 'react-native'
+import * as SecureStore from 'expo-secure-store'
 
 export default function Profile({ navigation }) {
+
+  const { isLogin } = useSelector(state => state)
+  const dispatch = useDispatch()
+
+  async function logout() {
+    await SecureStore.deleteItemAsync('UserAuthStateKey')
+    dispatch({ type: 'SET_ISLOGIN', payload: false })
+    // navigation.navigate("Landing")
+  }
 
   return (
     <View style={styles.container}>
@@ -12,6 +23,7 @@ export default function Profile({ navigation }) {
         <Text style={styles.text}>Email: john_doe@mail.com</Text>
         <Text style={styles.text}>Phone: 08123456789</Text>
       </View>
+      <Button title="Logout" onPress={logout} />
     </View>
   )
 }

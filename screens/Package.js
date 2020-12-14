@@ -1,26 +1,21 @@
 import React, { useState } from 'react'
-import { Text, View, StyleSheet, Button, TextInput } from 'react-native'
+import { Text, View, StyleSheet, Button, TextInput, ScrollView } from 'react-native'
+import { PackageCard } from '../components/'
 
 export default function Package({ navigation }) {
 
   return (
-    <View style={styles.container}>
-      <Text>Package page</Text>
-      <View style={styles.box}>
-        <Text>From: Tokopedia</Text>
-        <View style={styles.box_inner}>
-          <Text>Arrived: Saturday, 11/12/2020</Text>
-          <Text>Description: Big box</Text>
-        </View>
+    <ScrollView>
+      <View style={styles.container}>
+        <Text>Package page</Text>
+        <PackageCard />
+        <PackageCard />
+        <PackageCard />
+        <PackageCard />
+        <PackageCard />
+        <PackageCard />
       </View>
-      <View style={styles.box}>
-        <Text>From: Tokopedia</Text>
-        <View style={styles.box_inner}>
-          <Text>Arrived: Saturday, 11/12/2020</Text>
-          <Text>Description: Big box</Text>
-        </View>
-      </View>
-    </View>
+    </ScrollView>
   )
 }
 
