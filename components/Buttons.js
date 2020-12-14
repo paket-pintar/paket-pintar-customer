@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     paddingVertical: 14,
     paddingHorizontal: 10,
-    backgroundColor: '#3648d3',
+    backgroundColor: '#2623bf',
     marginVertical: 3,
   },
   buttonTextInv: {
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     marginVertical: 3,
   },
   buttonText: {
-    color: '#3648d3',
+    color: '#2623bf',
     textTransform: 'uppercase',
     fontSize: 20,
     fontFamily: '',

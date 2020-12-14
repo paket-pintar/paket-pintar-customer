@@ -18,7 +18,7 @@ export default function Register({ navigation }) {
   return (
     <View style={styles.container}>
             <View style={styles.header}>
-        <Text style={styles.headerText}>USER REGISTER</Text>
+        <Text style={styles.headerText}>REGISTER</Text>
       </View>
       <View style={styles.groupContainer}>
       <Text style={styles.textLabel}>Email</Text>
@@ -37,19 +37,19 @@ export default function Register({ navigation }) {
           onChangeText={(text) => setPassword(text)}
           placeholder="Create password"
         />
-        <Text style={styles.textLabel}>Fullname</Text>
+        <Text style={styles.textLabel}>Full Name</Text>
         <TextInput
           style={styles.textInput}
           value={fullname}
           onChangeText={(text) => setFullname(text)}
-          placeholder="Fullname"
+          placeholder="Full Name"
         />
-        <Text style={styles.textLabel}>Address</Text>
+        <Text style={styles.textLabel}>Unit</Text>
         <TextInput
           style={styles.textInput}
           value={address}
           onChangeText={(text) => setAddress(text)}
-          placeholder="Address"
+          placeholder="Unit"
         />
       </View>
 
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   },
 
   headerText: {
-    fontSize: 20,
+    fontSize: 25,
     alignSelf: "center",
     letterSpacing: 3,
     color: "#2623bf",
