@@ -7,7 +7,7 @@ export default function History({ navigation }) {
   return (
     <ScrollView>
       <View style={styles.container}>
-        <Text>History page</Text>
+      <Text style={styles.headerText}>Packages History</Text>
         <HistoryCard />
         <HistoryCard />
         <HistoryCard />
@@ -25,6 +25,10 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     padding: 40
+  },
+  headerText: {
+    fontSize: 25,
+    marginBottom: 15,
   },
   box: {
     backgroundColor: '#ddd',

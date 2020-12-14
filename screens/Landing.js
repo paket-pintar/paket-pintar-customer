@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { Text, View, StyleSheet, Button, TextInput } from 'react-native'
+import React, { useState } from "react"
+import { Text, View, StyleSheet, Button, TextInput } from "react-native"
+import {MenuButton} from '../components/Buttons'
 
 export default function Landing({ navigation }) {
-
   function gotToRegisterPage() {
     navigation.navigate("Register")
   }
@@ -12,31 +12,60 @@ export default function Landing({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text>Landing page</Text>
-      <Text>Paket Pintar</Text>
-      <View style={styles.button}>
-        <Button
-          title="Register"
-          color="#007AFF"
-          onPress={gotToRegisterPage} />
+      
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Better Letter</Text>
       </View>
-      <View style={styles.button}>
-        <Button style={styles.button} title="Login" onPress={goToLoginPage} />
+
+      <View style={styles.buttonGroup}>
+        <View style={styles.buttonContainer}>
+          <MenuButton
+          text="Register"
+            onPress={gotToRegisterPage}
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+        <MenuButton
+          text="Login"
+            onPress={goToLoginPage}
+          />
+        </View>
       </View>
+
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+  
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
+    flexDirection: "column",
+    backgroundColor: "#2623bf",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  header: {
+    flex: 2,
     justifyContent: 'center',
   },
+  headerText: {
+    color: '#fff',
+    fontSize: 50,
+  },
+  buttonGroup: {
+    flex: 2,
+    alignSelf: "stretch",
+  },
   button: {
+    color: '#ddd',
+    fontStyle: 'italic',
     borderRadius: 10,
-    margin: 10,
-    paddingTop: 10
-  }
-});
+    fontSize: 100,
+  },
+  buttonContainer: {
+    borderRadius: 10,
+    padding: 10,
+    marginHorizontal: 30,
+  },
+})

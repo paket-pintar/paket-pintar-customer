@@ -5,10 +5,10 @@ export default function PackageCard() {
 
   return (
     <View style={styles.box}>
-      <Text>From: Tokopedia</Text>
+      <Text style={styles.textHead}><Text style={styles.textHeadFrom}>From : </Text>Tokopedia</Text>
+        <Text style={styles.textContentDate}>Saturday, 11/12/2020</Text>
       <View style={styles.box_inner}>
-        <Text>Arrived: Saturday, 11/12/2020</Text>
-        <Text>Description: Big box</Text>
+        <Text style={styles.textContentDescription}>Box besar Hitam dari JNE</Text>
       </View>
     </View>
   )
@@ -23,12 +23,32 @@ const styles = StyleSheet.create({
     padding: 40
   },
   box: {
-    backgroundColor: '#ddd',
+    alignSelf: 'stretch',
+    backgroundColor: '#2623bf',
+    borderRadius: 10,
     padding: 20,
-    margin: 10
+    margin: 5
+  },
+  textHead: {
+    color: '#00e5ff',
+    fontSize: 18,
+  },
+  textHeadFrom: {
+    color: '#8685e6',
+  },
+  textContent: {
+    color: '#fff'
+  },
+  textContentDescription: {
+    color: '#fff',
+    fontSize: 15,
+
+  },
+  textContentDate: {
+    color: '#8685e6'
   },
   box_inner: {
     padding: 5,
-    paddingLeft: 15
+    paddingLeft: 10
   }
 });
