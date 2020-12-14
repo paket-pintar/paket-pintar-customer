@@ -2,7 +2,8 @@ import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 import { Text, View, StyleSheet, Button, TextInput } from "react-native"
 import { MenuButtonInv } from "../components/Buttons"
-
+import axios from '../config/axios'
+// import axios from 'axios'
 import * as SecureStore from "expo-secure-store"
 
 export default function Login({ navigation }) {
@@ -10,15 +11,27 @@ export default function Login({ navigation }) {
   const [password, setPassword] = useState("")
   const dispatch = useDispatch()
 
-  async function login() {
-    const userAuth = JSON.stringify({ email, password })
-    let data = await SecureStore.setItemAsync("UserAuthStateKey", userAuth)
-    dispatch({ type: "SET_ISLOGIN", payload: true })
+  async function submitLogin() {
     // let data = await SecureStore.getItemAsync('UserAuthStateKey')
     // let data = await SecureStore.deleteItemAsync('UserAuthStateKey')
-    // console.log(data)
-
-    // navigation.navigate("MainPage")
+    console.log(email, password)
+    try {
+      const { data: user } = await axios({
+        method: 'POST',
+        url: '/login-user',
+        data: { email, password }
+      })
+      const userAuth = JSON.stringify(user)
+      console.log(user);
+      await SecureStore.setItemAsync("UserAuthStateKey", userAuth)
+      dispatch({ type: "SET_LOGIN", payload: true, user })
+    } catch (err) {
+      if (err.response?.data) {
+        console.log(err.response.data);
+      } else {
+        console.log(err);
+      }
+    }
   }
 
   return (
@@ -41,7 +54,7 @@ export default function Login({ navigation }) {
         />
       </View>
       <View style={styles.groupContainer}>
-        <MenuButtonInv text="Login" onPress={login} />
+        <MenuButtonInv text="Login" onPress={submitLogin} />
       </View>
     </View>
   )

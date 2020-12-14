@@ -6,7 +6,7 @@ import { MenuButtonInv, MenuButton } from "../components/Buttons"
 import * as SecureStore from "expo-secure-store"
 
 export default function Profile({ navigation }) {
-  const { isLogin } = useSelector((state) => state)
+  const { user } = useSelector((state) => state)
   const dispatch = useDispatch()
 
   async function logout() {
@@ -18,6 +18,7 @@ export default function Profile({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.box}>
+        <Text>{ JSON.stringify(user) }</Text>
         <Text style={styles.textName}>John Doe</Text>
         <Text style={styles.textEmail}>john_doe@mail.com</Text>
         <Text style={styles.textUnit}>9A/D1</Text>
