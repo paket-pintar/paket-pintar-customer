@@ -1,11 +1,17 @@
 import { createStore } from 'redux'
 
 const initialState = {
-  name: 'jun'
+  isLogin: false
 }
 
 function reducer(state = initialState, action) {
-  return state
+  switch (action.type) {
+    case 'SET_ISLOGIN':
+      return { ...state, isLogin: action.payload }
+
+    default:
+      return state
+  }
 }
 
 const store = createStore(reducer)

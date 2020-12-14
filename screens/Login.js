@@ -1,13 +1,23 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Text, View, StyleSheet, Button, TextInput } from 'react-native'
+import * as SecureStore from 'expo-secure-store'
 
 export default function Login({ navigation }) {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const dispatch = useDispatch()
 
-  function login() {
-    navigation.navigate("MainPage")
+  async function login() {
+    const userAuth = JSON.stringify({ email, password })
+    let data = await SecureStore.setItemAsync('UserAuthStateKey', userAuth)
+    dispatch({ type: 'SET_ISLOGIN', payload: true })
+    // let data = await SecureStore.getItemAsync('UserAuthStateKey')
+    // let data = await SecureStore.deleteItemAsync('UserAuthStateKey')
+    // console.log(data)
+
+    // navigation.navigate("MainPage")
   }
 
   return (

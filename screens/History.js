@@ -1,28 +1,20 @@
 import React, { useState } from 'react'
-import { Text, View, StyleSheet, Button, TextInput } from 'react-native'
+import { Text, View, StyleSheet, Button, TextInput, ScrollView, FlatList } from 'react-native'
+import { HistoryCard } from '../components/';
 
 export default function History({ navigation }) {
 
   return (
-    <View style={styles.container}>
-      <Text>History page</Text>
-      <View style={styles.box}>
-        <Text>From: Tokopedia</Text>
-        <View style={styles.box_inner}>
-          <Text>Arrived: Saturday, 11/12/2020</Text>
-          <Text>Description: Big box</Text>
-        </View>
-        <Text>Received: Saturday, 11/12/2020</Text>
+    <ScrollView>
+      <View style={styles.container}>
+        <Text>History page</Text>
+        <HistoryCard />
+        <HistoryCard />
+        <HistoryCard />
+        <HistoryCard />
+        <HistoryCard />
       </View>
-      <View style={styles.box}>
-        <Text>From: Tokopedia</Text>
-        <View style={styles.box_inner}>
-          <Text>Arrived: Saturday, 11/12/2020</Text>
-          <Text>Description: Big box</Text>
-        </View>
-        <Text>Received: Saturday, 11/12/2020</Text>
-      </View>
-    </View>
+    </ScrollView>
   )
 }
 
