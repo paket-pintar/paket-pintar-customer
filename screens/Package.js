@@ -7,7 +7,7 @@ export default function Package({ navigation }) {
   return (
     <ScrollView>
       <View style={styles.container}>
-        <Text>Package page</Text>
+        <Text style={styles.headerText}>Your Packages</Text>
         <PackageCard />
         <PackageCard />
         <PackageCard />
@@ -26,6 +26,10 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     padding: 40
+  },
+  headerText: {
+    fontSize: 25,
+    marginBottom: 15,
   },
   box: {
     backgroundColor: '#ddd',
