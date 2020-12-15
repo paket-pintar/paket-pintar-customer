@@ -1,14 +1,34 @@
-import React, { useState } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { Text, View, StyleSheet, Button, TouchableOpacity } from "react-native"
 import { MenuButtonInv, MenuButton } from "../components/Buttons"
+import * as Notifications from 'expo-notifications';
 
 export default function Home({ navigation }) {
-  function pushNotification() {
-    navigation.navigate("PushNotification")
-  }
+  // function pushNotification() {
+  //   navigation.navigate("PushNotification")
+  // }
+  const [notification, setNotification] = useState(false);
+  const notificationListener = useRef();
+  const responseListener = useRef();
+
   function goToPakage() {
     navigation.navigate("Package")
   }
+
+  useEffect(() => {
+    // This listener is fired whenever a notification is received while the app is foregrounded
+    notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+      // console.log('notification: >>>>>>>>', notification.request.content);
+      setNotification(notification);
+    });
+
+    // This listener is fired whenever a user taps on or interacts with a notification (works when app is foregrounded, backgrounded, or killed)
+    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log('response foreground >>>>>>>>', response);
+    });
+    // Notifications.removeNotificationSubscription(notificationListener);
+    // Notifications.removeNotificationSubscription(responseListener);
+  }, [])
 
   return (
     <View style={styles.container}>
@@ -16,11 +36,11 @@ export default function Home({ navigation }) {
         <View style={styles.headerCircle}>
           <Text style={styles.headerText}>2</Text>
         </View>
-          <Text style={styles.headerSubText}>New Packages</Text>
+        <Text style={styles.headerSubText}>New Packages</Text>
       </View>
 
       <View style={styles.buttonGroup}>
-        <MenuButton text="test push notification" onPress={pushNotification} />
+        {/* <MenuButton text="test push notification" onPress={pushNotification} /> */}
         <MenuButton text="Check Your Package" onPress={goToPakage} />
       </View>
     </View>

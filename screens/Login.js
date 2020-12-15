@@ -1,11 +1,13 @@
-import React, { useState } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { Text, View, StyleSheet, Button, TextInput } from "react-native"
 import { MenuButtonInv } from "../components/Buttons"
 import axios from '../config/axios'
 import { fetchPackages } from '../actions';
-// import axios from 'axios'
 import * as SecureStore from "expo-secure-store"
+
+import { registerForPushNotificationsAsync } from '../helpers/notification'
+
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("")
@@ -13,7 +15,7 @@ export default function Login({ navigation }) {
   const dispatch = useDispatch()
 
   async function submitLogin() {
-    console.log(email, password)
+    // console.log(email, password)
     try {
       const { data: user } = await axios({
         method: 'POST',
@@ -21,7 +23,18 @@ export default function Login({ navigation }) {
         data: { email, password }
       })
       const userAuth = JSON.stringify(user)
-      console.log(user);
+      // console.log(user);
+      const createdExpoToken = await registerForPushNotificationsAsync()
+      // console.log('createdExpoToken', createdExpoToken);
+
+      const registerTokenSuccess = await axios({
+        url: '/users/register-token/' + user.id,
+        method: 'PUT',
+        headers: { access_token: user.access_token },
+        data: { userToken: createdExpoToken }
+      })
+      // console.log('registerTokenSuccess', registerTokenSuccess.data);  
+      // isi "msg": "Register user token success!",
       dispatch(fetchPackages(user.access_token))
       dispatch({ type: "SET_LOGIN", payload: true, user })
       await SecureStore.setItemAsync("UserAuthStateKey", userAuth)
