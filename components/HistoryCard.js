@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
-import { Text, View, StyleSheet, Button, TextInput } from 'react-native'
+import React from 'react'
+import { Text, View, StyleSheet } from 'react-native'
+import { getDateTime } from '../helpers/dateConverter'
 
 export default function HistoryCard({ pack }) {
 
   return (
     <View style={styles.box}>
-      <Text style={styles.textHead}><Text style={styles.textHeadFrom}>From : </Text>{ pack.sender }</Text>
-      <Text style={styles.textContentDate}>Received : { pack.updatedAt.toLocaleString() }</Text>
+      <Text style={styles.textHead}><Text style={styles.textHeadFrom}>From : </Text>{pack.sender}</Text>
+      <Text style={styles.textContentDate}>Received : {getDateTime(pack.updatedAt)}</Text>
       <View style={styles.box_inner}>
-      <Text style={styles.textContentDescription}>{ pack.description }</Text>
+        <Text style={styles.textContentDescription}>{pack.description}</Text>
       </View>
     </View>
   )

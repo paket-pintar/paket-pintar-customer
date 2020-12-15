@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Text, View, StyleSheet, Button, TextInput, ScrollView, FlatList } from 'react-native'
+import React from 'react'
+import { Text, View, StyleSheet, ScrollView, FlatList } from 'react-native'
 import { useSelector } from 'react-redux';
 import { HistoryCard } from '../components/';
 
@@ -9,13 +9,13 @@ export default function History({ navigation }) {
   return (
     <ScrollView>
       <View style={styles.container}>
-      <Text style={styles.headerText}>Packages History</Text>
+        <Text style={styles.headerText}>Packages History</Text>
         {
           history.map(pack => {
             return (
-              <HistoryCard 
-                key={ pack.id }
-                pack={ pack }
+              <HistoryCard
+                key={pack.id}
+                pack={pack}
               />
             )
           })

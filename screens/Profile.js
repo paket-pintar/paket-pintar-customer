@@ -18,7 +18,7 @@ export default function Profile({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.box}>
-        <Text>{JSON.stringify(user)}</Text>
+        {/* <Text>{JSON.stringify(user)}</Text> */}
         <Text style={styles.textName}>{user.name}</Text>
         <Text style={styles.textEmail}>{user.email}</Text>
         <Text style={styles.textUnit}>{user.unit}</Text>
