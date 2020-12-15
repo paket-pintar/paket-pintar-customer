@@ -1,18 +1,34 @@
 import React, { useState } from "react"
 import { Text, View, StyleSheet, Button, TextInput } from "react-native"
 import { MenuButtonInv } from "../components/Buttons"
+import axios from '../config/axios';
 
 export default function Register({ navigation }) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [fullname, setFullname] = useState("")
-  const [address, setAddress] = useState("")
-  const [phone, setPhone] = useState("")
+  const [name, setName] = useState("")
+  const [unit, setUnit] = useState("")
 
-
-
-  function register() {
-    navigation.navigate("MainPage")
+  async function submitRegister() {
+    const payload = {
+      email, password, name, unit
+    }
+    console.log(payload);
+    try {
+      const { data: newUser } = await axios({
+        method: 'POST',
+        url: '/register',
+        data: payload
+      })
+      console.log(newUser);
+      // navigation.navigate("MainPage")
+    } catch (err) {
+      if (err.response?.data) {
+        console.log(err.response.data);
+      } else {
+        console.log(err);
+      }
+    }
   }
 
   return (
@@ -40,21 +56,21 @@ export default function Register({ navigation }) {
         <Text style={styles.textLabel}>Full Name</Text>
         <TextInput
           style={styles.textInput}
-          value={fullname}
-          onChangeText={(text) => setFullname(text)}
+          value={name}
+          onChangeText={(text) => setName(text)}
           placeholder="Full Name"
         />
         <Text style={styles.textLabel}>Unit</Text>
         <TextInput
           style={styles.textInput}
-          value={address}
-          onChangeText={(text) => setAddress(text)}
+          value={unit}
+          onChangeText={(text) => setUnit(text)}
           placeholder="Unit"
         />
       </View>
 
       <View style={styles.groupContainer}>
-        <MenuButtonInv text="Register" onPress={register} />
+        <MenuButtonInv text="Register" onPress={submitRegister} />
       </View>
     </View>
   )

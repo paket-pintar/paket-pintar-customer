@@ -1,18 +1,25 @@
 import React, { useState } from 'react'
 import { Text, View, StyleSheet, Button, TextInput, ScrollView, FlatList } from 'react-native'
+import { useSelector } from 'react-redux';
 import { HistoryCard } from '../components/';
 
 export default function History({ navigation }) {
+  const { loading, history } = useSelector(state => state)
 
   return (
     <ScrollView>
       <View style={styles.container}>
       <Text style={styles.headerText}>Packages History</Text>
-        <HistoryCard />
-        <HistoryCard />
-        <HistoryCard />
-        <HistoryCard />
-        <HistoryCard />
+        {
+          history.map(pack => {
+            return (
+              <HistoryCard 
+                key={ pack.id }
+                pack={ pack }
+              />
+            )
+          })
+        }
       </View>
     </ScrollView>
   )

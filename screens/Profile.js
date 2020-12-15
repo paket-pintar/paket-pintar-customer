@@ -6,21 +6,22 @@ import { MenuButtonInv, MenuButton } from "../components/Buttons"
 import * as SecureStore from "expo-secure-store"
 
 export default function Profile({ navigation }) {
-  const { isLogin } = useSelector((state) => state)
+  const { user } = useSelector((state) => state)
   const dispatch = useDispatch()
 
   async function logout() {
     await SecureStore.deleteItemAsync("UserAuthStateKey")
-    dispatch({ type: "SET_ISLOGIN", payload: false })
+    dispatch({ type: 'SET_LOGOUT' })
     // navigation.navigate("Landing")
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.box}>
-        <Text style={styles.textName}>John Doe</Text>
-        <Text style={styles.textEmail}>john_doe@mail.com</Text>
-        <Text style={styles.textUnit}>9A/D1</Text>
+        <Text>{ JSON.stringify(user) }</Text>
+        <Text style={styles.textName}>{ user.name }</Text>
+        <Text style={styles.textEmail}>{ user.email }</Text>
+        <Text style={styles.textUnit}>{ user.unit }</Text>
       </View>
       <View style={styles.buttonGroup}>
       <MenuButton text="Logout" onPress={logout} />

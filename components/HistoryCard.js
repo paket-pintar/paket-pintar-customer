@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { Text, View, StyleSheet, Button, TextInput } from 'react-native'
 
-export default function HistoryCard() {
+export default function HistoryCard({ pack }) {
 
   return (
     <View style={styles.box}>
-      <Text style={styles.textHead}><Text style={styles.textHeadFrom}>From : </Text>Tokopedia</Text>
-      <Text style={styles.textContentDate}>Received : Saturday, 11/12/2020</Text>
+      <Text style={styles.textHead}><Text style={styles.textHeadFrom}>From : </Text>{ pack.sender }</Text>
+      <Text style={styles.textContentDate}>Received : { pack.updatedAt.toLocaleString() }</Text>
       <View style={styles.box_inner}>
-      <Text style={styles.textContentDescription}>Box besar Hitam dari JNE</Text>
+      <Text style={styles.textContentDescription}>{ pack.description }</Text>
       </View>
     </View>
   )

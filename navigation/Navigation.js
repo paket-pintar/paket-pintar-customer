@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { PushNotification, Landing, Login, Register } from '../screens/'
 import { BottomTabNav } from '../components/'
 import * as SecureStore from 'expo-secure-store'
+import { fetchPackages } from '../actions';
 
 const Stack = createStackNavigator()
 
@@ -19,8 +20,10 @@ export default function Navigation() {
 
   async function confirmIsLogin() {
     let user = await SecureStore.getItemAsync('UserAuthStateKey')
+    user = JSON.parse(user)
     if (user) {
-      dispatch({ type: 'SET_ISLOGIN', payload: true })
+      dispatch({ type: "SET_LOGIN", payload: true, user })
+      dispatch(fetchPackages(user.access_token))
     } else {
       dispatch({ type: 'SET_ISLOGIN', payload: false })
     }

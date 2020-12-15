@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
 import { Text, View, StyleSheet, Image } from 'react-native'
 import QRCode from 'react-native-qrcode-svg'
+import { useSelector } from 'react-redux'
 
 export default function QRCodePage({ navigation }) {
+  const { QRValue } = useSelector(store => store)
 
   return (
     <View style={styles.container}>
       {/* <Text style={styles.headerText}>Scan Your QR</Text> */}
       <View style={styles.qrContainer}>
+        <Text>{ QRValue }</Text>
         <QRCode 
           value="ini ngetes"
           size={250}
