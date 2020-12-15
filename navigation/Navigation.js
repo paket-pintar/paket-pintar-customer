@@ -6,6 +6,7 @@ import { PushNotification, Landing, Login, Register } from '../screens/'
 import { BottomTabNav } from '../components/'
 import * as SecureStore from 'expo-secure-store'
 import { fetchPackages } from '../actions';
+import { StatusBar } from 'expo-status-bar'
 
 const Stack = createStackNavigator()
 
@@ -31,12 +32,19 @@ export default function Navigation() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: !isLogin,
+        }}
+      >
         {
           isLogin
             ? (
               <>
-                <Stack.Screen name="MainPage" component={BottomTabNav} options={{ title: "Paket Pintar MainPage" }} />
+                <Stack.Screen
+                  name="MainPage"
+                  component={BottomTabNav}
+                  options={{ title: "Paket Pintar MainPage" }} />
                 <Stack.Screen name="PushNotification" component={PushNotification} />
               </>
             )
@@ -50,6 +58,11 @@ export default function Navigation() {
         }
       </Stack.Navigator>
       {/* <Stack.Screen name="MainPage" component={BottomTabNav} options={{ headerShown: false }} /> */}
+      <StatusBar
+        backgroundColor="#fff"
+        style="auto"
+      // 'auto', 'inverted', 'light', or 'dark'
+      />
     </NavigationContainer>
   );
 }
