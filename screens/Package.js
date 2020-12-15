@@ -9,11 +9,12 @@ export default function Package({ navigation, route }) {
   // const access_token = useSelector(store => store.access_token)
   const { loading, packages } = useSelector(store => store)
 
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
-  React.useEffect(() => {
-    const user = SecureStore.getItemAsync('UserAuthStateKey')
-  }, [])
+  // React.useEffect(() => {
+  //   const user = SecureStore.getItemAsync('UserAuthStateKey')
+  //   // dispatch(fetchPackages(access_token))
+  // }, [])
 
   // function refreshPage() {
     // ambil token dari local storage atau store

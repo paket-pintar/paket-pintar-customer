@@ -12,6 +12,7 @@ export function fetchPackages(access_token) {
       }
     })
        .then(({ data }) => {
+         console.log(data);
          dispatch({
            type: 'FETCH_PACKAGES',
            payload: data

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux"
 import { Text, View, StyleSheet, Button, TextInput } from "react-native"
 import { MenuButtonInv } from "../components/Buttons"
 import axios from '../config/axios'
+import { fetchPackages } from '../actions';
 // import axios from 'axios'
 import * as SecureStore from "expo-secure-store"
 
@@ -12,8 +13,6 @@ export default function Login({ navigation }) {
   const dispatch = useDispatch()
 
   async function submitLogin() {
-    // let data = await SecureStore.getItemAsync('UserAuthStateKey')
-    // let data = await SecureStore.deleteItemAsync('UserAuthStateKey')
     console.log(email, password)
     try {
       const { data: user } = await axios({
@@ -23,8 +22,9 @@ export default function Login({ navigation }) {
       })
       const userAuth = JSON.stringify(user)
       console.log(user);
-      await SecureStore.setItemAsync("UserAuthStateKey", userAuth)
+      dispatch(fetchPackages(user.access_token))
       dispatch({ type: "SET_LOGIN", payload: true, user })
+      await SecureStore.setItemAsync("UserAuthStateKey", userAuth)
     } catch (err) {
       if (err.response?.data) {
         console.log(err.response.data);
