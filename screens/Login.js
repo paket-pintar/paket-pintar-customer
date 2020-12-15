@@ -54,6 +54,7 @@ export default function Login({ navigation }) {
           placeholder="Email address"
         />
         <TextInput
+          secureTextEntry={true}
           style={styles.textInput}
           value={password}
           onChangeText={(text) => setPassword(text)}
