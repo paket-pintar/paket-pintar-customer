@@ -1,9 +1,9 @@
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState } from "react"
 import { useDispatch } from "react-redux"
-import { Text, View, StyleSheet, Button, TextInput } from "react-native"
+import { Text, View, StyleSheet, TextInput } from "react-native"
 import { MenuButtonInv } from "../components/Buttons"
-import axios from '../config/axios'
-import { fetchPackages } from '../actions';
+// import axios from '../config/axios'
+import { fetchPackages, fetchLogin, fetchRegisterExpoToken } from '../actions';
 import * as SecureStore from "expo-secure-store"
 
 import { registerForPushNotificationsAsync } from '../helpers/notification'
@@ -17,27 +17,21 @@ export default function Login({ navigation }) {
   async function submitLogin() {
     // console.log(email, password)
     try {
-      const { data: user } = await axios({
-        method: 'POST',
-        url: '/login-user',
-        data: { email, password }
-      })
+      const { data: user } = await fetchLogin(email, password)
+      // isi access_token, email, id, name, unit
       const userAuth = JSON.stringify(user)
       // console.log(user);
       const createdExpoToken = await registerForPushNotificationsAsync()
       // console.log('createdExpoToken', createdExpoToken);
 
-      const registerTokenSuccess = await axios({
-        url: '/users/register-token/' + user.id,
-        method: 'PUT',
-        headers: { access_token: user.access_token },
-        data: { userToken: createdExpoToken }
-      })
-      // console.log('registerTokenSuccess', registerTokenSuccess.data);  
-      // isi "msg": "Register user token success!",
+      // isi registerTokenSuccessMessage => "msg": "Register user token success!"
+      const registerTokenSuccessMessage = await fetchRegisterExpoToken(user.id, user.access_token, createdExpoToken)
+      // console.log('registerTokenSuccessMessage', registerTokenSuccessMessage.data);
       dispatch(fetchPackages(user.access_token))
       dispatch({ type: "SET_LOGIN", payload: true, user })
+
       await SecureStore.setItemAsync("UserAuthStateKey", userAuth)
+
     } catch (err) {
       if (err.response?.data) {
         console.log(err.response.data);

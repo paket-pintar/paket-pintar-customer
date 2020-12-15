@@ -1,6 +1,6 @@
-import React, { useState } from "react"
-import { Text, View, StyleSheet, Button, TextInput, Image } from "react-native"
-import {MenuButton} from '../components/Buttons'
+import React from "react"
+import { View, StyleSheet, Image } from "react-native"
+import { MenuButton } from '../components/Buttons'
 
 export default function Landing({ navigation }) {
   function gotToRegisterPage() {
@@ -12,19 +12,19 @@ export default function Landing({ navigation }) {
 
   return (
     <View style={styles.container}>
-      
+
       <View style={styles.header}>
-        <Image style={styles.logo} source={require('../assets/BetterLetterLogo_color.png')}/>
+        <Image style={styles.logo} source={require('../assets/BetterLetterLogo_color.png')} />
       </View>
 
       <View style={styles.buttonGroup}>
         <View style={styles.buttonContainer}>
           <MenuButton
             text="Login"
-              onPress={goToLoginPage}
-            />
+            onPress={goToLoginPage}
+          />
           <MenuButton
-          text="Register"
+            text="Register"
             onPress={gotToRegisterPage}
           />
         </View>
@@ -37,7 +37,7 @@ export default function Landing({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  
+
   container: {
     flex: 1,
     flexDirection: "column",

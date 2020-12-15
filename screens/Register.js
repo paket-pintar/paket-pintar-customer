@@ -1,7 +1,7 @@
 import React, { useState } from "react"
-import { Text, View, StyleSheet, Button, TextInput } from "react-native"
+import { Text, View, StyleSheet, TextInput } from "react-native"
 import { MenuButtonInv } from "../components/Buttons"
-import axios from '../config/axios';
+import { fetchRegister } from "../actions/"
 
 export default function Register({ navigation }) {
   const [email, setEmail] = useState("")
@@ -13,14 +13,10 @@ export default function Register({ navigation }) {
     const payload = {
       email, password, name, unit
     }
-    console.log(payload);
+    // console.log(payload);
     try {
-      const { data: newUser } = await axios({
-        method: 'POST',
-        url: '/register',
-        data: payload
-      })
-      console.log(newUser);
+      const { data: newUser } = await fetchRegister(payload)
+      // console.log(newUser);
       // navigation.navigate("MainPage")
     } catch (err) {
       if (err.response?.data) {
@@ -33,11 +29,11 @@ export default function Register({ navigation }) {
 
   return (
     <View style={styles.container}>
-            <View style={styles.header}>
+      <View style={styles.header}>
         <Text style={styles.headerText}>REGISTER</Text>
       </View>
       <View style={styles.groupContainer}>
-      <Text style={styles.textLabel}>Email</Text>
+        <Text style={styles.textLabel}>Email</Text>
 
         <TextInput
           style={styles.textInput}
@@ -45,7 +41,7 @@ export default function Register({ navigation }) {
           onChangeText={(text) => setEmail(text)}
           placeholder="Email address"
         />
-                <Text style={styles.textLabel}>Password</Text>
+        <Text style={styles.textLabel}>Password</Text>
 
         <TextInput
           style={styles.textInput}

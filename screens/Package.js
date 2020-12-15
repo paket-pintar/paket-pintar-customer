@@ -17,30 +17,30 @@ export default function Package({ navigation, route }) {
   // }, [])
 
   // function refreshPage() {
-    // ambil token dari local storage atau store
-    // dispatch(fetchPackages(access_token))
+  // ambil token dari local storage atau store
+  // dispatch(fetchPackages(access_token))
   // }
 
   if (loading) {
-    return(
+    return (
       <View style={styles.container}>
         <Text style={styles.headerText}>Your Packages</Text>
         <Text>Loading your data...</Text>
       </View>
     )
   }
-  
+
   return (
     <ScrollView>
       <View style={styles.container}>
         <Text style={styles.headerText}>Your Packages</Text>
-        <Text>{ JSON.stringify(packages) }</Text>
+        {/* <Text>{ JSON.stringify(packages) }</Text> */}
         {
           packages.map(pack => {
             return (
-              <PackageCard 
-                key={ pack.id }
-                pack={ pack }
+              <PackageCard
+                key={pack.id}
+                pack={pack}
               />
             )
           })
