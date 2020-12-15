@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import { PushNotification, Landing, Login, Register } from '../screens/'
+import { Landing, Login, Register } from '../screens/'
+// import { PushNotification, Landing, Login, Register } from '../screens/'
 import { BottomTabNav } from '../components/'
 import * as SecureStore from 'expo-secure-store'
 import { fetchPackages } from '../actions';
@@ -45,7 +46,7 @@ export default function Navigation() {
                   name="MainPage"
                   component={BottomTabNav}
                   options={{ title: "Paket Pintar MainPage" }} />
-                <Stack.Screen name="PushNotification" component={PushNotification} />
+                {/* <Stack.Screen name="PushNotification" component={PushNotification} /> */}
               </>
             )
             : (
