@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import { Landing, Login, Register } from '../screens/'
+import { Landing, Login, Register, LoadingPackage } from '../screens/'
 // import { PushNotification, Landing, Login, Register } from '../screens/'
 import { BottomTabNav } from '../components/'
 import * as SecureStore from 'expo-secure-store'
@@ -13,7 +13,7 @@ const Stack = createStackNavigator()
 
 export default function Navigation() {
 
-  const { isLogin } = useSelector(state => state)
+  const { isLogin, loading } = useSelector(state => state)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -40,15 +40,20 @@ export default function Navigation() {
       >
         {
           isLogin
-            ? (
-              <>
-                <Stack.Screen
-                  name="MainPage"
-                  component={BottomTabNav}
-                  options={{ title: "Paket Pintar MainPage" }} />
-                {/* <Stack.Screen name="PushNotification" component={PushNotification} /> */}
-              </>
-            )
+            ? loading
+              ? <Stack.Screen
+                name="LoadingPackage"
+                component={LoadingPackage}
+              />
+              : (
+                <>
+                  <Stack.Screen
+                    name="MainPage"
+                    component={BottomTabNav}
+                    options={{ title: "Paket Pintar MainPage" }} />
+                  {/* <Stack.Screen name="PushNotification" component={PushNotification} /> */}
+                </>
+              )
             : (
               <>
                 <Stack.Screen name="Landing" component={Landing} options={{ title: "Paket Pintar" }} />

@@ -1,12 +1,13 @@
 import React, { useState } from "react"
 import { useDispatch } from "react-redux"
-import { Text, View, StyleSheet, TextInput } from "react-native"
+import { Text, View, StyleSheet, TextInput, Alert } from "react-native"
 import { MenuButtonInv } from "../components/Buttons"
 // import axios from '../config/axios'
 import { fetchPackages, fetchLogin, fetchRegisterExpoToken } from '../actions';
 import * as SecureStore from "expo-secure-store"
 
 import { registerForPushNotificationsAsync } from '../helpers/notification'
+import { validateEmail } from '../helpers/validateEmail'
 
 
 export default function Login({ navigation }) {
@@ -16,6 +17,19 @@ export default function Login({ navigation }) {
 
   async function submitLogin() {
     // console.log(email, password)
+    let isEmail = validateEmail(email)
+
+    if (!isEmail) {
+      // return alert('Please input correct email format!')
+      return Alert.alert(
+        "Wrong Format",
+        "Please input correct email format!",
+        [
+          { text: "OK" }
+        ],
+      );
+    }
+
     try {
       const { data: user } = await fetchLogin(email, password)
       // isi access_token, email, id, name, unit
@@ -33,8 +47,9 @@ export default function Login({ navigation }) {
       await SecureStore.setItemAsync("UserAuthStateKey", userAuth)
 
     } catch (err) {
-      if (err.response?.data) {
-        console.log(err.response.data);
+      if (err.response.data) {
+        console.log('err.response.data', err.response.data);
+        alert(err.response.data.msg)
       } else {
         console.log(err);
       }

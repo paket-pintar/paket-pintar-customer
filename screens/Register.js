@@ -1,7 +1,9 @@
 import React, { useState } from "react"
-import { Text, View, StyleSheet, TextInput } from "react-native"
+import { Text, View, StyleSheet, TextInput, Alert } from "react-native"
 import { MenuButtonInv } from "../components/Buttons"
 import { fetchRegister } from "../actions/"
+
+import { validateEmail } from '../helpers/validateEmail'
 
 export default function Register({ navigation }) {
   const [email, setEmail] = useState("")
@@ -10,6 +12,28 @@ export default function Register({ navigation }) {
   const [unit, setUnit] = useState("")
 
   async function submitRegister() {
+    let isEmail = validateEmail(email)
+
+    if (!isEmail) {
+      return Alert.alert(
+        "Wrong Format",
+        "Please input correct email format!",
+        [
+          { text: "OK" }
+        ],
+      );
+    }
+
+    // if (email && password && name && unit) {
+    //   return Alert.alert(
+    //     "Field Required",
+    //     `${email || password || name || unit} still empty`,
+    //     [
+    //       { text: "OK" }
+    //     ],
+    //   );
+    // }
+
     const payload = {
       email, password, name, unit
     }
@@ -19,8 +43,9 @@ export default function Register({ navigation }) {
       // console.log(newUser);
       // navigation.navigate("MainPage")
     } catch (err) {
-      if (err.response?.data) {
+      if (err.response.data) {
         console.log(err.response.data);
+        alert(err.response.data.msg)
       } else {
         console.log(err);
       }
@@ -45,6 +70,7 @@ export default function Register({ navigation }) {
 
         <TextInput
           style={styles.textInput}
+          secureTextEntry={true}
           value={password}
           onChangeText={(text) => setPassword(text)}
           placeholder="Create password"
