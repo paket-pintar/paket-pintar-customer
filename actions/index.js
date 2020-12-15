@@ -26,6 +26,31 @@ export function fetchPackages(access_token) {
   }
 }
 
+export function fetchRegister(payload) {
+  return axios({
+    method: 'POST',
+    url: '/register',
+    data: payload
+  })
+}
+
+export function fetchLogin(email, password) {
+  return axios({
+    method: 'POST',
+    url: '/login-user',
+    data: { email, password }
+  })
+}
+
+export function fetchRegisterExpoToken(id, access_token, userToken) {
+  return axios({
+    url: '/users/register-token/' + id,
+    method: 'PUT',
+    headers: { access_token },
+    data: { userToken }
+  })
+}
+
 // export function fetchUserProfile(access_token) {
 //   return (dispatch) => {
 //     dispatch({ type: 'SET_LOADING', payload: true })

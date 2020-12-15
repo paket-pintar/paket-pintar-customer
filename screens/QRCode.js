@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Text, View, StyleSheet, Image } from 'react-native'
+import React from 'react'
+import { View, StyleSheet } from 'react-native'
 import QRCode from 'react-native-qrcode-svg'
 import { useSelector } from 'react-redux'
 
@@ -10,13 +10,13 @@ export default function QRCodePage({ navigation }) {
     <View style={styles.container}>
       {/* <Text style={styles.headerText}>Scan Your QR</Text> */}
       <View style={styles.qrContainer}>
-        <Text>{ QRValue }</Text>
-        <QRCode 
-          value="ini ngetes"
+        {/* <Text>{ QRValue }</Text> */}
+        <QRCode
+          value={QRValue}
           size={250}
           style={styles.qrCode}
           color="black"
-          backgroundColor="white"/>
+          backgroundColor="white" />
       </View>
     </View>
   )
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     margin: 10,
   },
-  qrCode : {
+  qrCode: {
     padding: 20
   }
 });
