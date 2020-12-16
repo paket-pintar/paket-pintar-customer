@@ -1,14 +1,17 @@
 import React from 'react'
-import { View, StyleSheet, Text, ScrollView } from 'react-native'
+import { View, StyleSheet, Text, ScrollView, SafeAreaView, RefreshControl } from 'react-native'
 import QRCode from 'react-native-qrcode-svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { MenuButtonInv, LogoutButton } from "../components/Buttons"
 import * as SecureStore from "expo-secure-store"
 import { Feather } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import GlobalStyles from '../GlobalStyles';
+import { fetchPackages } from '../actions'
 
 export default function Home({ navigation }) {
-  const { QRValue, user, packages } = useSelector(store => store)
+  const { QRValue, user, packages, access_token } = useSelector(store => store)
+  const [ refreshing, setRefreshing] = React.useState(false)
   const dispatch = useDispatch()
 
   async function logout() {
@@ -21,9 +24,29 @@ export default function Home({ navigation }) {
     navigation.navigate("Package")
   }
 
+  function setPackagesNull() {
+    dispatch({ type: 'SET_PACKAGES_NULL' })
+  }
+  
+  const onRefresh = React.useCallback(() => {
+    console.log(access_token, 'refetching');
+    // setRefreshing(true)
+
+    // wait(2000).then(() => {
+      // setRefreshing(false)
+      dispatch(fetchPackages(access_token))
+    // })
+  })
+
   return (
-    <View style={styles.container}>
-      <ScrollView style={styles.headerContainerView}>
+    // <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <ScrollView 
+        style={styles.headerContainerView}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
         <View style={styles.headerContainer}>
           <Text style={styles.headerTitle}>Hello</Text>
           <View style={styles.headerItemContainer}>
@@ -60,8 +83,12 @@ export default function Home({ navigation }) {
         <View style={styles.buttonGroup}>
           <LogoutButton text="Logout" onPress={logout} />
         </View>
+        <View style={styles.buttonGroup}>
+          <LogoutButton text="Set Packages Null" onPress={setPackagesNull} />
+        </View>
       </ScrollView>
-    </View>
+    {/* </View> */}
+    </SafeAreaView>
   )
 }
 
