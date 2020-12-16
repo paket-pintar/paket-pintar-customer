@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { Text, View, StyleSheet, Button, TextInput, ScrollView } from 'react-native'
+import { Text, View, StyleSheet, Button, TextInput, ScrollView, Image } from 'react-native'
 import { PackageCard } from '../components/'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -22,6 +22,23 @@ export default function Package({ navigation, route }) {
         <Text style={styles.headerText}>Your Packages</Text>
         <Text>Loading your data...</Text>
       </View>
+    )
+  }
+
+  if (packages.length === 0 ) {
+    return (
+      <ScrollView>
+      <View style={styles.container}>
+        <Text style={styles.headerText}>Your Packages</Text>
+
+        <View style={styles.noPackageContainer}>
+          <Image style={styles.image} source={require('../assets/emptyBox.png')} />
+
+          <Text style={styles.noPackText}>No New Packages for You...</Text>
+
+        </View>
+      </View>
+    </ScrollView>
     )
   }
 
@@ -66,5 +83,18 @@ const styles = StyleSheet.create({
   box_inner: {
     padding: 5,
     paddingLeft: 15
+  },
+  noPackageContainer: {
+    alignSelf: 'stretch',
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  noPackText: {
+    fontSize: 15,
+    marginTop: 20,
   }
+
 });

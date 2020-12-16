@@ -23,7 +23,7 @@ export default function Home({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView style={styles.headerContainerView}>
         <View style={styles.headerContainer}>
           <Text style={styles.headerTitle}>Hello</Text>
           <View style={styles.headerItemContainer}>
@@ -31,11 +31,16 @@ export default function Home({ navigation }) {
             <Text style={styles.headerItemText}>{user.unit}</Text>
           </View>
         </View>
+
         <Text style={styles.titleText}>Summary</Text>
-        <TouchableOpacity style={styles.summaryButton} onPressOut={goToPackage}>
-          <Feather name="mail" size={50} color="blue" />
-          <Text style={styles.summaryText}> {packages.length} New Packages</Text>
-        </TouchableOpacity>
+
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.summaryButton} onPressOut={goToPackage}>
+            <Feather name="mail" size={50} color="blue" />
+            <Text style={styles.summaryText}> {packages.length} New Packages</Text>
+          </TouchableOpacity>
+        </View>
+
         <Text style={styles.titleText}>Your QRCode</Text>
         <View style={styles.container}>
           <View style={styles.qrContainer}>
@@ -68,10 +73,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   headerTitle: {
+    paddingTop: 20,
     fontSize: 30,
     color: '#fff',
   },
+  headerContainerView: {
+    alignSelf: 'stretch',
+  },
   headerContainer: {
+    alignSelf: 'stretch',
     padding: 20,
     justifyContent: 'center',
     borderBottomEndRadius: 20,
@@ -84,16 +94,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: 15,
+    marginTop: 1,
   },
   headerItemText: {
     color: 'gold',
-    fontSize: 16,
+    fontSize: 18,
   },
   titleText: {
     textAlign: 'left',
+    color: '#686868',
     fontSize: 18,
     marginTop: 10,
+    paddingHorizontal: 20,
   },
   qrContainer: {
     justifyContent: 'center',
@@ -104,8 +116,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     margin: 10,
   },
+  buttonContainer: {
+    marginHorizontal: 'auto',
+  },
   summaryButton: {
-    width: 350,
     paddingVertical: 14,
     paddingHorizontal: 60,
     justifyContent: 'space-between',
@@ -114,6 +128,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: '#fff',
     marginTop: 10,
+    marginBottom: 10,
+    marginHorizontal: 20
   },
   summaryText: {
     fontSize: 20
