@@ -35,13 +35,16 @@ export default function Navigation() {
       // console.log('notification: >>>>>>>>', notification.request.content);
       // console.log('qwerty');
       setNotification(notification);
-      // console.log('listener :', access_token);
-      // dispatch(fetchPackages(access_token))
+      console.log('listener foreground :', access_token);
+      dispatch(fetchPackages(access_token))
     });
 
     // This listener is fired whenever a user taps on or interacts with a notification (works when app is foregrounded, backgrounded, or killed)
     responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-      console.log('response foreground >>>>>>>>', response);
+      // console.log('response foreground >>>>>>>>', response);
+      // setNotification(notification);
+      console.log('listener :', access_token);
+      dispatch(fetchPackages(access_token))
     });
     // Notifications.removeNotificationSubscription(notificationListener);
     // Notifications.removeNotificationSubscription(responseListener);
@@ -63,9 +66,9 @@ export default function Navigation() {
     <NavigationContainer>
       <Stack.Navigator
         headerMode='none'
-        // screenOptions={{
-        //   headerShown: !isLogin,
-        // }}
+      // screenOptions={{
+      //   headerShown: !isLogin,
+      // }}
       >
         {
           isLogin

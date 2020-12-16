@@ -2,6 +2,7 @@ import React from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { MaterialCommunityIcons, Octicons, MaterialIcons, FontAwesome } from '@expo/vector-icons';
 import { Home, Package, History, QRCodePage, Profile } from '../screens/'
+import PackageNavigation from '../navigation/PackageNavigation'
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -24,17 +25,7 @@ export default function BottomTabNav() {
           ),
         }}
       />
-      <Tab.Screen
-        name="Package"
-        component={Package}
-        options={{
-          tabBarLabel: 'Package',
-          tabBarIcon: ({ color }) => (
-            <Octicons name="package" color={color} size={26} />
-          ),
-        }}
-      />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="QRCode"
         component={QRCodePage}
         options={{
@@ -43,18 +34,18 @@ export default function BottomTabNav() {
             <MaterialCommunityIcons name="qrcode" color={color} size={26} />
           ),
         }}
-      />
+      /> */}
       <Tab.Screen
-        name="History"
-        component={History}
+        name="Package"
+        component={PackageNavigation}
         options={{
-          tabBarLabel: 'History',
+          tabBarLabel: 'Pack',
           tabBarIcon: ({ color }) => (
-            <MaterialIcons name="history-edu" color={color} size={26} />
+            <Octicons name="package" color={color} size={26} />
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Profile"
         component={Profile}
         options={{
@@ -63,7 +54,7 @@ export default function BottomTabNav() {
             <FontAwesome name="user" color={color} size={26} />
           ),
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 }
