@@ -12,7 +12,6 @@ export function MenuButton(props) {
     </TouchableOpacity>
   )
 }
-
 export function MenuButtonInv(props) {
   return(
     <TouchableOpacity onPress={props.onPress}>
@@ -36,7 +35,35 @@ export function GameButton(props) {
   )
 }
 
+export function LogoutButton(props) {
+  return(
+    <TouchableOpacity onPress={props.onPress}>
+      <View style={styles.buttonLogout}>
+        <Text
+          style={styles.logoutText}>{props.text}</Text>
+      </View>
+
+    </TouchableOpacity>
+  )
+}
+
+
 const styles = StyleSheet.create({
+  buttonLogout: {
+    width:'auto',
+    borderRadius: 5,
+    paddingVertical: 14,
+    paddingHorizontal: 10,
+    backgroundColor: '#1141d1',
+    marginVertical: 3,
+  },
+  logoutText: {
+    color: '#ffff',
+    textTransform: 'uppercase',
+    fontSize: 15,
+    // fontFamily: '',
+    textAlign: 'center'
+  },
   buttonInv: {
     width:'auto',
     borderRadius: 50,
