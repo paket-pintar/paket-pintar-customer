@@ -2,14 +2,34 @@ import React, { useState, useRef } from 'react'
 import { Text, View, StyleSheet, Button, TextInput, ScrollView } from 'react-native'
 import { PackageCard } from '../components/'
 import { useDispatch, useSelector } from 'react-redux'
+import * as Notifications from 'expo-notifications';
+import { fetchPackages } from '../actions';
 
 export default function Package({ navigation, route }) {
   const { loading, packages, access_token } = useSelector(store => store)
   const dispatch = useDispatch()
+  const [notification, setNotification] = useState(false);
+  const notificationListener = useRef();
+  const responseListener = useRef();
 
-  // React.useEffect(() => {
-  //   // const user = SecureStore.getItemAsync('UserAuthStateKey')
-  // }, [])
+  React.useEffect(() => {
+    // const user = SecureStore.getItemAsync('UserAuthStateKey')
+    notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+      // console.log('notification: >>>>>>>>', notification.request.content);
+      // console.log('qwerty');
+      setNotification(notification);
+      console.log('listener foreground :', access_token);
+      dispatch(fetchPackages(access_token))
+    });
+
+    // This listener is fired whenever a user taps on or interacts with a notification (works when app is foregrounded, backgrounded, or killed)
+    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+      // console.log('response foreground >>>>>>>>', response);
+      // setNotification(notification);
+      console.log('listener :', access_token);
+      dispatch(fetchPackages(access_token))
+    });
+  }, [])
 
   // function refreshPage() {
   // ambil token dari local storage atau store
