@@ -35,6 +35,17 @@ export function GameButton(props) {
   )
 }
 
+export function RefreshButton(props) {
+  return(
+    <TouchableOpacity onPress={props.onPress}>
+      <View style={styles.buttonRefresh}>
+        <Text
+          style={styles.refreshText}>{props.text}</Text>
+      </View>
+
+    </TouchableOpacity>
+  )
+}
 export function LogoutButton(props) {
   return(
     <TouchableOpacity onPress={props.onPress}>
@@ -54,7 +65,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingVertical: 14,
     paddingHorizontal: 10,
-    backgroundColor: '#1141d1',
+    backgroundColor: '#cc2f2f',
     marginVertical: 3,
   },
   logoutText: {
@@ -111,5 +122,21 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     fontSize: 15,
     textAlign: 'center'
-  }
+  },
+
+  buttonRefresh: {
+    width:'auto',
+    borderRadius: 5,
+    paddingVertical: 14,
+    paddingHorizontal: 10,
+    backgroundColor: '#cc2f2f',
+    marginVertical: 3,
+  },
+  refreshText: {
+    color: '#ffff',
+    textTransform: 'uppercase',
+    fontSize: 15,
+    // fontFamily: '',
+    textAlign: 'center'
+  },
 })

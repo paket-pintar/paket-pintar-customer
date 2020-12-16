@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Text, View, StyleSheet, Button, TextInput } from 'react-native'
-import { getDateTime } from '../helpers/dateConverter'
+import { getDateTime, getMomentDate } from '../helpers/dateConverter'
 
 export default function PackageCard({ pack }) {
   // var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -8,7 +8,7 @@ export default function PackageCard({ pack }) {
   return (
     <View style={styles.box}>
       <Text style={styles.textHead}><Text style={styles.textHeadFrom}>From : </Text>{pack.sender}</Text>
-      <Text style={styles.textContentDate}>{getDateTime(pack.createdAt)}</Text>
+      <Text style={styles.textContentDate}>Arrived : {getMomentDate(pack.createdAt)}</Text>
       <View style={styles.box_inner}>
         <Text style={styles.textContentDescription}>{pack.description}</Text>
       </View>
