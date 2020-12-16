@@ -34,9 +34,10 @@ export default function Navigation() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        screenOptions={{
-          headerShown: !isLogin,
-        }}
+        headerMode='none'
+        // screenOptions={{
+        //   headerShown: !isLogin,
+        // }}
       >
         {
           isLogin
@@ -64,11 +65,11 @@ export default function Navigation() {
         }
       </Stack.Navigator>
       {/* <Stack.Screen name="MainPage" component={BottomTabNav} options={{ headerShown: false }} /> */}
-      <StatusBar
+      {/* <StatusBar
         backgroundColor="#fff"
         style="auto"
       // 'auto', 'inverted', 'light', or 'dark'
-      />
+      /> */}
     </NavigationContainer>
   );
 }

@@ -35,11 +35,11 @@ export default function Login({ navigation }) {
       // isi access_token, email, id, name, unit
       const userAuth = JSON.stringify(user)
       // console.log(user);
-      const createdExpoToken = await registerForPushNotificationsAsync()
-      // console.log('createdExpoToken', createdExpoToken);
+      // const createdExpoToken = await registerForPushNotificationsAsync()
+      // // console.log('createdExpoToken', createdExpoToken);
 
-      // isi registerTokenSuccessMessage => "msg": "Register user token success!"
-      const registerTokenSuccessMessage = await fetchRegisterExpoToken(user.id, user.access_token, createdExpoToken)
+      // // isi registerTokenSuccessMessage => "msg": "Register user token success!"
+      // const registerTokenSuccessMessage = await fetchRegisterExpoToken(user.id, user.access_token, createdExpoToken)
       // console.log('registerTokenSuccessMessage', registerTokenSuccessMessage.data);
       dispatch(fetchPackages(user.access_token))
       dispatch({ type: "SET_LOGIN", payload: true, user })

@@ -2,9 +2,10 @@ import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 import QRCode from 'react-native-qrcode-svg'
 import { useDispatch, useSelector } from 'react-redux'
-import { MenuButtonInv, MenuButton } from "../components/Buttons"
+import { MenuButtonInv, LogoutButton } from "../components/Buttons"
 import * as SecureStore from "expo-secure-store"
 import { Feather } from '@expo/vector-icons'; 
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 export default function QRCodePage({ navigation }) {
   const { QRValue, user } = useSelector(store => store)
@@ -16,16 +17,24 @@ export default function QRCodePage({ navigation }) {
     navigation.navigate("Landing")
   }
 
+  function goToPackage() {
+    navigation.navigate("Package")
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.headerText}>Hello</Text>
-      <Text>{ user.name }</Text>
-      <Text>{ user.unit }</Text>
-      <Text style={ styles.titleText }>Summary</Text>
-      <View style={styles.summaryContainer}>
-        <Feather name="mail" size={40} color="blue" />
-        <Text style={ styles.summaryText }> 2 New Packages</Text>
+      <View style={ styles.headerContainer }>
+        <Text style={styles.headerTitle}>Hello</Text>
+        <View style={ styles.headerItemContainer }>
+          <Text style={ styles.headerItemText }>{ user.name }</Text>
+          <Text style={ styles.headerItemText }>{ user.unit }</Text>
+        </View>
       </View>
+      <Text style={ styles.titleText }>Summary</Text>
+      <TouchableOpacity style={styles.summaryButton} onPressOut={goToPackage}>
+        <Feather name="mail" size={50} color="blue" />
+        <Text style={ styles.summaryText }> 2 New Packages</Text>
+      </TouchableOpacity>
       <Text style={ styles.titleText }>Your QRCode</Text>
       <View style={styles.qrContainer}>
         <QRCode
@@ -36,7 +45,7 @@ export default function QRCodePage({ navigation }) {
           backgroundColor="white" />
       </View>
       <View style={styles.buttonGroup}>
-        <MenuButton text="Logout" onPress={logout} />
+        <LogoutButton text="Logout" onPress={logout} />
       </View>
     </View>
   )
@@ -47,41 +56,68 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'lightgray',
     alignItems: 'center',
-    justifyContent: 'center',
   },
-  headerText: {
+  headerTitle: {
     fontSize: 30,
     color: '#fff',
-    textAlign: 'center',
+  },
+  headerContainer: {
+    padding: 20,
+    justifyContent: 'center',
+    borderBottomEndRadius: 20,
+    borderBottomStartRadius: 20,
+    width: '100%',
+    height: 150,
+    backgroundColor: '#345eeb',
+    margin: 10,
+  },
+  headerItemContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 15,
+  },
+  headerItemText: {
+    color: 'gold',
+    fontSize: 16,
   },
   titleText: {
     textAlign: 'left',
-    fontSize: 18
+    fontSize: 18,
+    marginTop: 10,
   },
   qrContainer: {
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
-    width: 300,
+    width: '90%',
     height: 300,
     backgroundColor: '#fff',
     margin: 10,
   },
-  summaryContainer: {
-    justifyContent: 'center',
+  summaryButton: {
+    width: 350,
+    paddingVertical: 14,
+    paddingHorizontal: 60,
+    justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
     borderRadius: 20,
-    width: 300,
-    height: 80,
     backgroundColor: '#fff',
-    margin: 10,
-    paddingHorizontal: 20,
+    marginTop: 10,
   },
   summaryText: {
     fontSize: 20
   },
   qrCode: {
     padding: 20
-  }
+  },
+  buttonGroup: {
+    // flex: 1,
+    // justifyContent: 'flex-end',
+    // alignSelf: 'stretch',
+    // marginHorizontal: 40,
+    marginTop: 15,
+    width: '90%',
+  },
 });
