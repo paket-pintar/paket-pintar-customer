@@ -1,14 +1,16 @@
 import React, { useState, useRef } from 'react'
-import { Text, View, StyleSheet, Button, TextInput, ScrollView, Image } from 'react-native'
+import { Text, View, StyleSheet, Button, TextInput, ScrollView, Image, SafeAreaView, RefreshControl} from 'react-native'
 import { PackageCard } from '../components/'
 import { useDispatch, useSelector } from 'react-redux'
 import * as Notifications from 'expo-notifications';
 import { fetchPackages } from '../actions';
+import GlobalStyles from '../GlobalStyles';
 
 export default function Package({ navigation, route }) {
   const { loading, packages, access_token } = useSelector(store => store)
   const dispatch = useDispatch()
   const [notification, setNotification] = useState(false);
+  const [ refreshing, setRefreshing] = useState(false)
   const notificationListener = useRef();
   const responseListener = useRef();
 
@@ -31,10 +33,10 @@ export default function Package({ navigation, route }) {
     });
   }, [])
 
-  // function refreshPage() {
-  // ambil token dari local storage atau store
-  // dispatch(fetchPackages(access_token))
-  // }
+  const onRefresh = React.useCallback(() => {
+    console.log(access_token, 'refetching');
+    dispatch(fetchPackages(access_token))
+  })
 
   if (loading) {
     return (
@@ -55,12 +57,9 @@ export default function Package({ navigation, route }) {
         <ScrollView>
           <View style={styles.container}>
             <Text style={styles.headerText}>Your Packages</Text>
-
             <View style={styles.noPackageContainer}>
               <Image style={styles.image} source={require('../assets/emptyBox.png')} />
-
               <Text style={styles.noPackText}>No New Packages for You...</Text>
-
             </View>
           </View>
         </ScrollView>
@@ -74,7 +73,12 @@ export default function Package({ navigation, route }) {
         flex: 1,
         backgroundColor: '#fff',
       }}>
-      <ScrollView>
+      <ScrollView 
+        style={{ alignSelf: 'stretch' }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
         <View style={styles.container}>
           <Text style={styles.headerText}>Your Packages</Text>
           {/* <Text>{ JSON.stringify(packages) }</Text> */}
@@ -92,13 +96,13 @@ export default function Package({ navigation, route }) {
         </View>
       </ScrollView>
     </View>
-
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignSelf: 'stretch',
     backgroundColor: '#fff',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
