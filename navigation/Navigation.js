@@ -35,7 +35,7 @@ export default function Navigation() {
       // console.log('notification: >>>>>>>>', notification.request.content);
       // console.log('qwerty');
       setNotification(notification);
-      console.log('listener foreground :', access_token);
+      console.log('listener foreground nav:', access_token);
       dispatch(fetchPackages(access_token))
     });
 
@@ -43,7 +43,7 @@ export default function Navigation() {
     responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
       // console.log('response foreground >>>>>>>>', response);
       // setNotification(notification);
-      console.log('listener :', access_token);
+      console.log('listener nav:', access_token);
       dispatch(fetchPackages(access_token))
     });
     // Notifications.removeNotificationSubscription(notificationListener);

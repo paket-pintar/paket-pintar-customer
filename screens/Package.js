@@ -20,7 +20,7 @@ export default function Package({ navigation, route }) {
       // console.log('notification: >>>>>>>>', notification.request.content);
       // console.log('qwerty');
       setNotification(notification);
-      console.log('listener foreground :', access_token);
+      console.log('listener foreground packages :', access_token);
       dispatch(fetchPackages(access_token))
     });
 
@@ -28,7 +28,7 @@ export default function Package({ navigation, route }) {
     responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
       // console.log('response foreground >>>>>>>>', response);
       // setNotification(notification);
-      console.log('listener :', access_token);
+      console.log('listener packages:', access_token);
       dispatch(fetchPackages(access_token))
     });
   }, [])
@@ -47,58 +47,66 @@ export default function Package({ navigation, route }) {
     )
   }
 
-  if (packages.length === 0 ) {
+  if (packages.length === 0) {
     return (
-      <SafeAreaView>
-        <ScrollView style={{ alignSelf: 'stretch' }}>
-          {/* <View > */}
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: '#fff',
+        }}>
+        <ScrollView>
+          <View style={styles.container}>
             <Text style={styles.headerText}>Your Packages</Text>
-
             <View style={styles.noPackageContainer}>
               <Image style={styles.image} source={require('../assets/emptyBox.png')} />
-
               <Text style={styles.noPackText}>No New Packages for You...</Text>
-
             </View>
-          {/* </View> */}
+          </View>
         </ScrollView>
-      </SafeAreaView>
+      </View>
     )
   }
 
   return (
-  <SafeAreaView>
-    <ScrollView 
-      style={{ alignSelf: 'stretch' }}
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }
-    >
-      <View style={styles.container}>
-        <Text style={styles.headerText}>Your Packages</Text>
-        {
-          packages.map(pack => {
-            return (
-              <PackageCard
-              key={pack.id}
-              pack={pack}
-              />
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: '#fff',
+      }}>
+      <ScrollView 
+        style={{ alignSelf: 'stretch' }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
+        <View style={styles.container}>
+          <Text style={styles.headerText}>Your Packages</Text>
+          {/* <Text>{ JSON.stringify(packages) }</Text> */}
+          {
+            packages.map(pack => {
+              return (
+                <PackageCard
+                  key={pack.id}
+                  pack={pack}
+                />
               )
             })
           }
-      </View>
-    </ScrollView>
-  </SafeAreaView>
+          {/* <PackageCard /> */}
+        </View>
+      </ScrollView>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignSelf: 'stretch',
     backgroundColor: '#fff',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    padding: 40
+    padding: 40,
   },
   headerText: {
     fontSize: 25,
