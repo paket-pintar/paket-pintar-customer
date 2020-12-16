@@ -72,20 +72,14 @@ export default function Navigation() {
       >
         {
           isLogin
-            ? loading
-              ? <Stack.Screen
-                name="LoadingPackage"
-                component={LoadingPackage}
-              />
-              : (
-                <>
-                  <Stack.Screen
-                    name="MainPage"
-                    component={BottomTabNav}
-                    options={{ title: "Paket Pintar MainPage" }} />
-                  {/* <Stack.Screen name="PushNotification" component={PushNotification} /> */}
-                </>
-              )
+            ? 
+              <>
+                <Stack.Screen
+                  name="MainPage"
+                  component={BottomTabNav}
+                  options={{ title: "Paket Pintar MainPage" }} />
+                {/* <Stack.Screen name="PushNotification" component={PushNotification} /> */}
+              </>
             : (
               <>
                 <Stack.Screen name="Landing" component={Landing} options={{ title: "Paket Pintar" }} />
