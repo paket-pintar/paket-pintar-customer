@@ -6,9 +6,11 @@ import { MenuButtonInv, LogoutButton } from "../components/Buttons"
 import * as SecureStore from "expo-secure-store"
 import { Feather } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { Button } from 'react-native-paper'
+import { fetchPackages } from '../actions/'
 
 export default function Home({ navigation }) {
-  const { QRValue, user, packages } = useSelector(store => store)
+  const { QRValue, user, packages, access_token } = useSelector(store => store)
   const dispatch = useDispatch()
 
   async function logout() {
@@ -19,6 +21,10 @@ export default function Home({ navigation }) {
 
   function goToPackage() {
     navigation.navigate("Package")
+  }
+
+  function refetchPackages() {
+    dispatch(fetchPackages(access_token))
   }
 
   return (
@@ -58,6 +64,12 @@ export default function Home({ navigation }) {
           </View>
         </View>
         <View style={styles.buttonGroup}>
+          <Button
+            mode="outlined"
+            style={{ marginBottom: 20 }}
+            onPress={refetchPackages}
+            color="blue"
+          >Refresh Package</Button>
           <LogoutButton text="Logout" onPress={logout} />
         </View>
       </ScrollView>
@@ -143,6 +155,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 15,
     marginBottom: 30,
-    width: '40%',
+    width: '60%',
   },
 });
