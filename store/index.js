@@ -63,7 +63,7 @@ function reducer(state = initialState, action) {
       return { ...state, packages: newPackages, history: newHistory }
     case 'SET_PACKAGES_NULL':
       console.log('set packages null');
-      return { ...state, packages: [], history: newHistory }
+      return { ...state, packages: [], history: [] }
     default:
       return state
   }

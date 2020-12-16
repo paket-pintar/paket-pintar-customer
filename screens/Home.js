@@ -9,6 +9,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Button } from 'react-native-paper'
 import GlobalStyles from '../GlobalStyles';
 import { fetchPackages } from '../actions'
+import LoadingPackage from './LoadingPackage'
 
 export default function Home({ navigation }) {
   const { QRValue, user, packages, access_token } = useSelector(store => store)
@@ -31,20 +32,11 @@ export default function Home({ navigation }) {
   
   const onRefresh = React.useCallback(() => {
     console.log(access_token, 'refetching');
-    // setRefreshing(true)
-
-    // wait(2000).then(() => {
-      // setRefreshing(false)
-      dispatch(fetchPackages(access_token))
-    // })
-  })
-  function refetchPackages() {
     dispatch(fetchPackages(access_token))
-  }
+  })
 
   return (
-    // <View style={styles.container}>
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView 
         style={styles.headerContainerView}
         refreshControl={
@@ -62,7 +54,7 @@ export default function Home({ navigation }) {
         <Text style={styles.titleText}>Summary</Text>
 
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.summaryButton} onPressOut={goToPackage}>
+          <TouchableOpacity style={styles.summaryButton} onPress={goToPackage}>
             <Feather name="mail" size={50} color="blue" />
             <Text style={styles.summaryText}> {packages.length} New Packages</Text>
           </TouchableOpacity>
@@ -85,23 +77,13 @@ export default function Home({ navigation }) {
           </View>
         </View>
         <View style={styles.buttonGroup}>
-
-          {/* <Button
-            mode="outlined"
-            style={{ marginBottom: 20 }}
-            onPress={refetchPackages}
-            color="blue"
-          >Refresh Package</Button>
-          
-          <RefreshButton text="Refresh Package" onPress={refetchPackages}/> */}
           <LogoutButton text="Logout" onPress={logout} />
         </View>
         <View style={styles.buttonGroup}>
           <LogoutButton text="Set Packages Null" onPress={setPackagesNull} />
         </View>
       </ScrollView>
-    {/* </View> */}
-    </SafeAreaView>
+    </View>
   )
 }
 

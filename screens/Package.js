@@ -4,7 +4,7 @@ import { PackageCard } from '../components/'
 import { useDispatch, useSelector } from 'react-redux'
 import * as Notifications from 'expo-notifications';
 import { fetchPackages } from '../actions';
-import GlobalStyles from '../GlobalStyles';
+import LoadingPackage from './LoadingPackage';
 
 export default function Package({ navigation, route }) {
   const { loading, packages, access_token } = useSelector(store => store)
@@ -40,10 +40,7 @@ export default function Package({ navigation, route }) {
 
   if (loading) {
     return (
-      <View style={styles.container}>
-        <Text style={styles.headerText}>Your Packages</Text>
-        <Text>Loading your data...</Text>
-      </View>
+      <LoadingPackage/>
     )
   }
 
@@ -54,7 +51,12 @@ export default function Package({ navigation, route }) {
           flex: 1,
           backgroundColor: '#fff',
         }}>
-        <ScrollView>
+        <ScrollView 
+          style={{ alignSelf: 'stretch' }}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+        >
           <View style={styles.container}>
             <Text style={styles.headerText}>Your Packages</Text>
             <View style={styles.noPackageContainer}>
