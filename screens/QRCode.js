@@ -1,14 +1,14 @@
 import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet, Text, ScrollView } from 'react-native'
 import QRCode from 'react-native-qrcode-svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { MenuButtonInv, LogoutButton } from "../components/Buttons"
 import * as SecureStore from "expo-secure-store"
-import { Feather } from '@expo/vector-icons'; 
+import { Feather } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 export default function QRCodePage({ navigation }) {
-  const { QRValue, user } = useSelector(store => store)
+  const { QRValue, user, packages } = useSelector(store => store)
   const dispatch = useDispatch()
 
   async function logout() {
@@ -23,35 +23,39 @@ export default function QRCodePage({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={ styles.headerContainer }>
-        <Text style={styles.headerTitle}>Hello</Text>
-        <View style={ styles.headerItemContainer }>
-          <Text style={ styles.headerItemText }>{ user.name }</Text>
-          <Text style={ styles.headerItemText }>{ user.unit }</Text>
+      <ScrollView>
+        <View style={styles.headerContainer}>
+          <Text style={styles.headerTitle}>Hello</Text>
+          <View style={styles.headerItemContainer}>
+            <Text style={styles.headerItemText}>{user.name}</Text>
+            <Text style={styles.headerItemText}>{user.unit}</Text>
+          </View>
         </View>
-      </View>
-      <Text style={ styles.titleText }>Summary</Text>
-      <TouchableOpacity style={styles.summaryButton} onPressOut={goToPackage}>
-        <Feather name="mail" size={50} color="blue" />
-        <Text style={ styles.summaryText }> 2 New Packages</Text>
-      </TouchableOpacity>
-      <Text style={ styles.titleText }>Your QRCode</Text>
-      <View style={styles.qrContainer}>
-        {/* <Text>{ QRValue }</Text> */}
-        {
-          QRValue
-            ? <QRCode
-              value={QRValue}
-              size={250}
-              style={styles.qrCode}
-              color="black"
-              backgroundColor="white" />
-            : <Text>QR Code</Text>
-        }
-      </View>
-      <View style={styles.buttonGroup}>
-        <LogoutButton text="Logout" onPress={logout} />
-      </View>
+        <Text style={styles.titleText}>Summary</Text>
+        <TouchableOpacity style={styles.summaryButton} onPressOut={goToPackage}>
+          <Feather name="mail" size={50} color="blue" />
+          <Text style={styles.summaryText}> {packages.length} New Packages</Text>
+        </TouchableOpacity>
+        <Text style={styles.titleText}>Your QRCode</Text>
+        <View style={styles.container}>
+          <View style={styles.qrContainer}>
+            {/* <Text>{ QRValue }</Text> */}
+            {
+              QRValue
+                ? <QRCode
+                  value={QRValue}
+                  size={250}
+                  style={styles.qrCode}
+                  color="black"
+                  backgroundColor="white" />
+                : <Text>QR Code</Text>
+            }
+          </View>
+        </View>
+        <View style={styles.buttonGroup}>
+          <LogoutButton text="Logout" onPress={logout} />
+        </View>
+      </ScrollView>
     </View>
   )
 }
@@ -61,6 +65,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'lightgray',
     alignItems: 'center',
+    justifyContent: 'center'
   },
   headerTitle: {
     fontSize: 30,
@@ -74,7 +79,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 150,
     backgroundColor: '#345eeb',
-    margin: 10,
   },
   headerItemContainer: {
     flexDirection: 'row',
@@ -118,11 +122,11 @@ const styles = StyleSheet.create({
     padding: 20
   },
   buttonGroup: {
-    // flex: 1,
-    // justifyContent: 'flex-end',
-    // alignSelf: 'stretch',
-    // marginHorizontal: 40,
+    flex: 1,
+    justifyContent: 'center',
+    alignSelf: 'center',
     marginTop: 15,
-    width: '90%',
+    marginBottom: 30,
+    width: '40%',
   },
 });
