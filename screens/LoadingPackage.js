@@ -5,7 +5,7 @@ export default function LoadingPackage() {
 
   return (
     <View style={styles.container}>
-      <ActivityIndicator size="large" color="#00ff00" />
+      <ActivityIndicator size="large" color="#blue" />
     </View>
   )
 }

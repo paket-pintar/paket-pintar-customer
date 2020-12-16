@@ -7,21 +7,27 @@ export default function History({ navigation }) {
   const { loading, history } = useSelector(state => state)
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <Text style={styles.headerText}>Packages History</Text>
-        {
-          history.map(pack => {
-            return (
-              <HistoryCard
-                key={pack.id}
-                pack={pack}
-              />
-            )
-          })
-        }
-      </View>
-    </ScrollView>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: '#fff',
+      }}>
+      <ScrollView>
+        <View style={styles.container}>
+          <Text style={styles.headerText}>Packages History</Text>
+          {
+            history.map(pack => {
+              return (
+                <HistoryCard
+                  key={pack.id}
+                  pack={pack}
+                />
+              )
+            })
+          }
+        </View>
+      </ScrollView>
+    </View>
   )
 }
 
