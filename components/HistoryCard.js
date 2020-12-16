@@ -18,35 +18,35 @@ export default function HistoryCard({ pack }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#d3d3d3',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     padding: 40
   },
   box: {
     alignSelf: 'stretch',
-    backgroundColor: '#2623bf',
+    backgroundColor: '#E2E2E2',
     borderRadius: 10,
     padding: 20,
     margin: 5
   },
   textHead: {
-    color: '#00e5ff',
+    color: '#000',
     fontSize: 18,
   },
   textHeadFrom: {
-    color: '#8685e6',
+    color: '#000',
   },
   textContent: {
-    color: '#fff'
+    color: '#000'
   },
   textContentDescription: {
-    color: '#fff',
+    color: '#000',
     fontSize: 15,
 
   },
   textContentDate: {
-    color: '#8685e6'
+    color: '#000'
   },
   box_inner: {
     padding: 5,

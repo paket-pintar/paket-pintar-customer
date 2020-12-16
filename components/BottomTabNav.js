@@ -10,10 +10,11 @@ export default function BottomTabNav() {
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      activeColor="#00e5ff"
-      inactiveColor="#726fe1"
+      activeColor="#ffffff"
+      inactiveColor="#709ce8"
       labelStyle={{ fontSize: 12 }}
-      barStyle={{ backgroundColor: '#2623bf' }}
+      // barStyle={{ backgroundColor: '#2623bf' }}
+      barStyle={{ backgroundColor: '#345eeb' }}
     >
       <Tab.Screen
         name="Home"

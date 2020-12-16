@@ -5,7 +5,6 @@ import { getDateTime } from '../helpers/dateConverter'
 export default function PackageCard({ pack }) {
   // var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
-
   return (
     <View style={styles.box}>
       <Text style={styles.textHead}><Text style={styles.textHeadFrom}>From : </Text>{pack.sender}</Text>
@@ -27,17 +26,17 @@ const styles = StyleSheet.create({
   },
   box: {
     alignSelf: 'stretch',
-    backgroundColor: '#2623bf',
+    backgroundColor: '#345eeb',
     borderRadius: 10,
     padding: 20,
     margin: 5
   },
   textHead: {
-    color: '#00e5ff',
+    color: '#ffb531',
     fontSize: 18,
   },
   textHeadFrom: {
-    color: '#8685e6',
+    color: '#a9c9f7',
   },
   textContent: {
     color: '#fff'
@@ -48,7 +47,7 @@ const styles = StyleSheet.create({
 
   },
   textContentDate: {
-    color: '#8685e6'
+    color: '#a9c9f7'
   },
   box_inner: {
     padding: 5,
