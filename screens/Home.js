@@ -2,7 +2,7 @@ import React from 'react'
 import { View, StyleSheet, Text, ScrollView } from 'react-native'
 import QRCode from 'react-native-qrcode-svg'
 import { useDispatch, useSelector } from 'react-redux'
-import { MenuButtonInv, LogoutButton } from "../components/Buttons"
+import { MenuButtonInv, LogoutButton, RefreshButton } from "../components/Buttons"
 import * as SecureStore from "expo-secure-store"
 import { Feather } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler'
@@ -64,12 +64,15 @@ export default function Home({ navigation }) {
           </View>
         </View>
         <View style={styles.buttonGroup}>
-          <Button
+
+          {/* <Button
             mode="outlined"
             style={{ marginBottom: 20 }}
             onPress={refetchPackages}
             color="blue"
           >Refresh Package</Button>
+          
+          <RefreshButton text="Refresh Package" onPress={refetchPackages}/> */}
           <LogoutButton text="Logout" onPress={logout} />
         </View>
       </ScrollView>
