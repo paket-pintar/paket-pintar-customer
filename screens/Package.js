@@ -1,20 +1,30 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { Text, View, StyleSheet, Button, TextInput, ScrollView } from 'react-native'
 import { PackageCard } from '../components/'
 import * as SecureStore from "expo-secure-store"
 import { useDispatch, useSelector } from 'react-redux'
-// import { fetchPackages } from '../actions';
+import { fetchPackages } from '../actions';
+import * as Notifications from 'expo-notifications';
 
 export default function Package({ navigation, route }) {
   // const access_token = useSelector(store => store.access_token)
-  const { loading, packages } = useSelector(store => store)
+  const { loading, packages, access_token } = useSelector(store => store)
+  const [notification, setNotification] = useState(false);
+  const notificationListener = useRef();
+  // const responseListener = useRef();
+  const dispatch = useDispatch()
 
-  // const dispatch = useDispatch()
-
-  // React.useEffect(() => {
-  //   const user = SecureStore.getItemAsync('UserAuthStateKey')
-  //   // dispatch(fetchPackages(access_token))
-  // }, [])
+  React.useEffect(() => {
+    // const user = SecureStore.getItemAsync('UserAuthStateKey')
+    notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+      // console.log('notification: >>>>>>>>', notification.request.content);
+      // console.log('qwerty');
+      setNotification(notification);
+      console.log('listener :', access_token);
+      dispatch(fetchPackages(access_token))
+      navigation.navigate("Package")
+    });
+  }, [])
 
   // function refreshPage() {
   // ambil token dari local storage atau store

@@ -32,6 +32,7 @@ export default function Login({ navigation }) {
 
     try {
       const { data: user } = await fetchLogin(email, password)
+      // console.log(user);
       // isi access_token, email, id, name, unit
       const userAuth = JSON.stringify(user)
       // console.log(user);

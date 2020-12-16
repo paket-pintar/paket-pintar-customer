@@ -37,12 +37,17 @@ export default function QRCodePage({ navigation }) {
       </TouchableOpacity>
       <Text style={ styles.titleText }>Your QRCode</Text>
       <View style={styles.qrContainer}>
-        <QRCode
-          value={QRValue}
-          size={250}
-          style={styles.qrCode}
-          color="black"
-          backgroundColor="white" />
+        {/* <Text>{ QRValue }</Text> */}
+        {
+          QRValue
+            ? <QRCode
+              value={QRValue}
+              size={250}
+              style={styles.qrCode}
+              color="black"
+              backgroundColor="white" />
+            : <Text>QR Code</Text>
+        }
       </View>
       <View style={styles.buttonGroup}>
         <LogoutButton text="Logout" onPress={logout} />
