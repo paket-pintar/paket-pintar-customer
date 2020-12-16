@@ -2,10 +2,11 @@ import React from 'react'
 import { View, StyleSheet, Text, ScrollView, SafeAreaView, RefreshControl } from 'react-native'
 import QRCode from 'react-native-qrcode-svg'
 import { useDispatch, useSelector } from 'react-redux'
-import { MenuButtonInv, LogoutButton } from "../components/Buttons"
+import { MenuButtonInv, LogoutButton, RefreshButton } from "../components/Buttons"
 import * as SecureStore from "expo-secure-store"
 import { Feather } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { Button } from 'react-native-paper'
 import GlobalStyles from '../GlobalStyles';
 import { fetchPackages } from '../actions'
 
@@ -37,6 +38,9 @@ export default function Home({ navigation }) {
       dispatch(fetchPackages(access_token))
     // })
   })
+  function refetchPackages() {
+    dispatch(fetchPackages(access_token))
+  }
 
   return (
     // <View style={styles.container}>
@@ -81,6 +85,15 @@ export default function Home({ navigation }) {
           </View>
         </View>
         <View style={styles.buttonGroup}>
+
+          {/* <Button
+            mode="outlined"
+            style={{ marginBottom: 20 }}
+            onPress={refetchPackages}
+            color="blue"
+          >Refresh Package</Button>
+          
+          <RefreshButton text="Refresh Package" onPress={refetchPackages}/> */}
           <LogoutButton text="Logout" onPress={logout} />
         </View>
         <View style={styles.buttonGroup}>
@@ -170,6 +183,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 15,
     marginBottom: 30,
-    width: '40%',
+    width: '60%',
   },
 });

@@ -1,13 +1,13 @@
 import React from 'react'
 import { Text, View, StyleSheet } from 'react-native'
-import { getDateTime } from '../helpers/dateConverter'
+import { getDateTime, getMomentDate } from '../helpers/dateConverter'
 
 export default function HistoryCard({ pack }) {
 
   return (
     <View style={styles.box}>
       <Text style={styles.textHead}><Text style={styles.textHeadFrom}>From : </Text>{pack.sender}</Text>
-      <Text style={styles.textContentDate}>Received : {getDateTime(pack.updatedAt)}</Text>
+      <Text style={styles.textContentDate}>Received : {getMomentDate(pack.updatedAt)}</Text>
       <View style={styles.box_inner}>
         <Text style={styles.textContentDescription}>{pack.description}</Text>
       </View>

@@ -40,7 +40,7 @@ export default function BottomTabNav() {
         name="Package"
         component={PackageNavigation}
         options={{
-          tabBarLabel: 'Pack',
+          tabBarLabel: 'Packages',
           tabBarIcon: ({ color }) => (
             <Octicons name="package" color={color} size={26} />
           ),
