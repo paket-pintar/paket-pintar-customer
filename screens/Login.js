@@ -48,8 +48,9 @@ export default function Login({ navigation }) {
 
     } catch (err) {
       if (err.response.data) {
+        const error = err.response.data.msg
         console.log('err.response.data', err.response.data);
-        alert(err.response.data.msg)
+        Alert.alert('Login failed', error)
       } else {
         console.log(err);
       }
