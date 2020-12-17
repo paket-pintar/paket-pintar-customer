@@ -18,9 +18,11 @@ export function fetchPackages(access_token) {
           payload: data
         })
       })
-      .catch(console.log)
+      .catch(err => {
+        // console.log(err)
+      })
       .finally(() => {
-        console.log('fetch packages done')
+        // console.log('fetch packages done')
         dispatch({ type: 'SET_LOADING', payload: false })
       })
   }

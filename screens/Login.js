@@ -50,10 +50,11 @@ export default function Login({ navigation }) {
     } catch (err) {
       if (err.response.data) {
         const error = err.response.data.msg
-        console.log('err.response.data', err.response.data);
+        // console.log('err.response.data', err.response.data);
         Alert.alert('Login failed', error)
       } else {
-        console.log(err);
+        // console.log(err);
+        alert('error')
       }
     }
   }

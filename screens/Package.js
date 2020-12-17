@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { Text, View, StyleSheet, Button, TextInput, ScrollView, Image, SafeAreaView, RefreshControl} from 'react-native'
+import { Text, View, StyleSheet, Button, TextInput, ScrollView, Image, SafeAreaView, RefreshControl } from 'react-native'
 import { PackageCard } from '../components/'
 import { useDispatch, useSelector } from 'react-redux'
 import * as Notifications from 'expo-notifications';
@@ -10,7 +10,7 @@ export default function Package({ navigation, route }) {
   const { loading, packages, access_token } = useSelector(store => store)
   const dispatch = useDispatch()
   const [notification, setNotification] = useState(false);
-  const [ refreshing, setRefreshing] = useState(false)
+  const [refreshing, setRefreshing] = useState(false)
   const notificationListener = useRef();
   const responseListener = useRef();
 
@@ -20,7 +20,7 @@ export default function Package({ navigation, route }) {
       // console.log('notification: >>>>>>>>', notification.request.content);
       // console.log('qwerty');
       setNotification(notification);
-      console.log('listener foreground packages :', access_token);
+      // console.log('listener foreground packages :', access_token);
       dispatch(fetchPackages(access_token))
     });
 
@@ -28,19 +28,19 @@ export default function Package({ navigation, route }) {
     responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
       // console.log('response foreground >>>>>>>>', response);
       // setNotification(notification);
-      console.log('listener packages:', access_token);
+      // console.log('listener packages:', access_token);
       dispatch(fetchPackages(access_token))
     });
   }, [])
 
   const onRefresh = React.useCallback(() => {
-    console.log(access_token, 'refetching');
+    // console.log(access_token, 'refetching');
     dispatch(fetchPackages(access_token))
   })
 
   if (loading) {
     return (
-      <LoadingPackage/>
+      <LoadingPackage />
     )
   }
 
@@ -51,7 +51,7 @@ export default function Package({ navigation, route }) {
           flex: 1,
           backgroundColor: '#fff',
         }}>
-        <ScrollView 
+        <ScrollView
           style={{ alignSelf: 'stretch' }}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
@@ -75,7 +75,7 @@ export default function Package({ navigation, route }) {
         flex: 1,
         backgroundColor: '#fff',
       }}>
-      <ScrollView 
+      <ScrollView
         style={{ alignSelf: 'stretch' }}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />

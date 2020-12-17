@@ -30,7 +30,7 @@ export default function PushNotification() {
 
     // This listener is fired whenever a user taps on or interacts with a notification (works when app is foregrounded, backgrounded, or killed)
     responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-      console.log('response foreground >>>>>>>>', response);
+      // console.log('response foreground >>>>>>>>', response);
     });
     // Notifications.removeNotificationSubscription(notificationListener);
     // Notifications.removeNotificationSubscription(responseListener);
@@ -118,7 +118,7 @@ export async function registerForPushNotificationsAsync() {
       return;
     }
     token = (await Notifications.getExpoPushTokenAsync()).data;
-    console.log(token);
+    // console.log(token);
   } else {
     alert('Must use physical device for Push Notifications');
   }

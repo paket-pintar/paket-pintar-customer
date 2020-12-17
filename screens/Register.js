@@ -44,10 +44,11 @@ export default function Register({ navigation }) {
       // navigation.navigate("MainPage")
     } catch (err) {
       if (err.response.data) {
-        console.log(err.response.data);
+        // console.log(err.response.data);
         alert(err.response.data.msg)
       } else {
-        console.log(err);
+        // console.log(err);
+        alert('error')
       }
     }
   }

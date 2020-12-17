@@ -13,7 +13,7 @@ import LoadingPackage from './LoadingPackage'
 
 export default function Home({ navigation }) {
   const { QRValue, user, packages, access_token } = useSelector(store => store)
-  const [ refreshing, setRefreshing] = React.useState(false)
+  const [refreshing, setRefreshing] = React.useState(false)
   const dispatch = useDispatch()
 
   async function logout() {
@@ -29,15 +29,15 @@ export default function Home({ navigation }) {
   function setPackagesNull() {
     dispatch({ type: 'SET_PACKAGES_NULL' })
   }
-  
+
   const onRefresh = React.useCallback(() => {
-    console.log(access_token, 'refetching');
+    // console.log(access_token, 'refetching');
     dispatch(fetchPackages(access_token))
   })
 
   return (
     <View style={styles.container}>
-      <ScrollView 
+      <ScrollView
         style={styles.headerContainerView}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />

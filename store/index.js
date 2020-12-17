@@ -33,7 +33,8 @@ function reducer(state = initialState, action) {
       newQRValue = JSON.stringify(user.id)
       return { ...state, isLogin: action.payload, user: user, access_token: action.user.access_token, QRValue: newQRValue }
     case 'SET_LOGOUT':
-      return { ...state, 
+      return {
+        ...state,
         isLogin: false,
         access_token: '',
         user: {
@@ -62,7 +63,7 @@ function reducer(state = initialState, action) {
       })
       return { ...state, packages: newPackages, history: newHistory }
     case 'SET_PACKAGES_NULL':
-      console.log('set packages null');
+      // console.log('set packages null');
       return { ...state, packages: [], history: [] }
     default:
       return state
