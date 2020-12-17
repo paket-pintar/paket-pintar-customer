@@ -79,9 +79,6 @@ export default function Home({ navigation }) {
         <View style={styles.buttonGroup}>
           <LogoutButton text="Logout" onPress={logout} />
         </View>
-        <View style={styles.buttonGroup}>
-          <LogoutButton text="Set Packages Null" onPress={setPackagesNull} />
-        </View>
       </ScrollView>
     </View>
   )
