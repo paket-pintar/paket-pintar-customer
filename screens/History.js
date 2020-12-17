@@ -10,15 +10,15 @@ import LoadingPackage from './LoadingPackage';
 export default function History({ navigation }) {
   const { loading, history, access_token } = useSelector(state => state)
   const dispatch = useDispatch()
-  const [ refreshing, setRefreshing] = useState(false)
+  const [refreshing, setRefreshing] = useState(false)
   const onRefresh = useCallback(() => {
-    console.log(access_token, 'refetching');
+    // console.log(access_token, 'refetching');
     dispatch(fetchPackages(access_token))
   })
 
   if (loading) {
     return (
-      <LoadingPackage/>
+      <LoadingPackage />
     )
   }
 
@@ -28,23 +28,23 @@ export default function History({ navigation }) {
         flex: 1,
         backgroundColor: '#fff',
       }}>
-      <ScrollView 
+      <ScrollView
         style={{ alignSelf: 'stretch' }}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-      <View style={styles.container}>
-        <Text style={styles.headerText}>Packages History</Text>
-        {
-          (history.length === 0)
-            ?
+        <View style={styles.container}>
+          <Text style={styles.headerText}>Packages History</Text>
+          {
+            (history.length === 0)
+              ?
               <View style={styles.noPackageContainer}>
                 <Image style={styles.image} source={require('../assets/emptyBox.png')} />
                 <Text style={styles.noPackText}>There is no claimed packages yet...</Text>
               </View>
 
-            :
+              :
               history.map(pack => {
                 return (
                   <HistoryCard
